@@ -7,8 +7,8 @@ Routed CSS is a solution to organizing CSS in ReactJS applications that aims to 
 Your ReactJS component adds some boilerplate to convert a styling selector into a unique selector
 ```Javascript
 import React from 'react'
-import CBSS from "./CBSSLoader"
-const Styles = CBSS("Components/ProgressBar");
+import RoutedCSS from "./RoutedCSSLoader"
+const Styles = RoutedCSS("Components/ProgressBar");
 const StyleByProps = Styles.getPropsBySelector.bind(Styles)
 
 export default function component(): React.ReactElement {
