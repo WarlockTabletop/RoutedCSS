@@ -21,6 +21,9 @@ jobs:
           ls
           pkg ./build/main.js --out-path ./dist
           ls dist
+          file --mime-type ./dist/main-linux
+          file --mime-type ./dist/main-win.exe
+          file --mime-type ./dist/main-macos
 
       - name: Create Release
         id: create_release
@@ -46,6 +49,7 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./dist/main-linux
           asset_name: RoutedCSS-linux
+          asset_content_type: application/x-msdownload
       
       - name: Upload Windows Release Asset
         id: upload-windows-release-asset 
@@ -56,6 +60,7 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./dist/main-win.exe
           asset_name: RoutedCSS-windows.exe
+          asset_content_type: application/x-msdownload
       
       - name: Upload MacOS Release Asset
         id: upload-macos-release-asset 
@@ -66,6 +71,7 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./dist/main-macos
           asset_name: RoutedCSS-macos
+          asset_content_type: application/x-msdownload
 
       # - name: upload linux artifact
       #   uses: actions/upload-release-asset@v1
