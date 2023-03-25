@@ -2,6 +2,9 @@ name: Build Routed CSS
 
 on: [push]
 
+permissions: read-all|write-all
+
+
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
