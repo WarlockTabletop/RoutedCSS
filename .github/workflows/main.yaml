@@ -15,7 +15,7 @@ jobs:
           npm install -g pkg
           npm run build --if-present
           ls
-          pkg ./build/main.js
+          pkg ./build/main.js --out-path ./dist
           ls
 
       - name: Archive production artifacts
