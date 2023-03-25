@@ -5,7 +5,7 @@ Routed CSS is a solution to organizing CSS in ReactJS applications that aims to 
 
 #### Simplifing Your CSS by adding React Boilerplate
 Your ReactJS component adds some boilerplate to convert a styling selector into a unique selector
-```
+```Javascript
 import React from 'react'
 import CBSS from "./CBSSLoader"
 const Styles = CBSS("Components/ProgressBar");
@@ -25,7 +25,7 @@ export default function component(): React.ReactElement {
 }
 ```
 The above code allows your CSS to be written simply as:
-```
+```CSS
 .Wrapper {
 
 }
