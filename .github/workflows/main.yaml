@@ -28,8 +28,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: routedcss-${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
           body: |
             Changes in this Release
             - First Change
@@ -37,7 +37,7 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset
+      - name: Upload Linux Release Asset
         id: upload-linux-release-asset 
         uses: actions/upload-release-asset@v1
         env:
@@ -46,9 +46,8 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./dist/main-linux
           asset_name: RoutedCSS-linux
-          asset_content_type: application/zip
       
-      - name: Upload Release Asset
+      - name: Upload Windows Release Asset
         id: upload-windows-release-asset 
         uses: actions/upload-release-asset@v1
         env:
@@ -56,8 +55,17 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./dist/main-win.exe
-          asset_name: RoutedCSS-windows
-          asset_content_type: application/x-msdownload
+          asset_name: RoutedCSS-windows.exe
+      
+      - name: Upload MacOS Release Asset
+        id: upload-macos-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./dist/main-macos
+          asset_name: RoutedCSS-macos
 
       # - name: upload linux artifact
       #   uses: actions/upload-release-asset@v1
