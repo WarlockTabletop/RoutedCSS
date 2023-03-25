@@ -2,8 +2,9 @@ name: Build Routed CSS
 
 on: [push]
 
-permissions: read-all|write-all
-
+permissions:
+  contents: write
+  pull-requests: read
 
 jobs:
   build_and_test:
