@@ -1,0 +1,1 @@
+SET "PATH=%MY_PATH%;%PATH%"
