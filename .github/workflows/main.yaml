@@ -16,11 +16,25 @@ jobs:
           npm run build --if-present
           ls
           pkg ./build/main.js --out-path ./dist
-          ls
-
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
+          ls dist
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
-          name: dist-without-markdown
-          path: |
-            dist
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      # - name: upload linux artifact
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ github.token }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: ./dist/azblogfilter.linux-amd64.tar.gz
+      #     asset_name: azblogfilter.linux-amd64.tar.gz
+      #     asset_content_type: application/gzip
+
+      
